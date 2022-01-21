@@ -25,6 +25,8 @@ make fcfs
 - Contains the function *run*, this function simulate the execution of a task by the CPU (read the task from the memory and execute it)
 
 ## list.h
+#### Simulate the memory
+- Contains the struct *node* who is a linked list (each node will represent a cell in the memory).
 #### Simulate the memory operations
 - Contains the functions *insert*, *delete* and *traverse*.
 
@@ -32,7 +34,8 @@ make fcfs
 #### Functionality of the OS:
 - Contains the functions *add* and *schedule*. The first permit to simulate the loading of the processes in the memory and the second permit to simulate the scheduling of the execution of the tasks.
 - The function *add* use the memory operation *insert* to insert the tasks in the memory.
-- The function *schedule* use the memeory opration *delete* and *traverse* to read and to delete a task on the memory.
+- The function *schedule* use the CPU *run* function, the memory opration *delete* and *traverse* to read and to delete a task on the memory.
+- To schedule, we will select a task in the memory depending on the scheduling algorithm, execute it and remove it from the memory when the executing will be completed succesfully.
 
 ## driver.c
 #### Simulate the OS:
