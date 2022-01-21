@@ -39,6 +39,23 @@ void schedule()
 {
     Task *selected_task;
     
+    int nb_task = 0;
+    
+    // Previous burst time
+    int prev_burst = 0;
+    
+    // Current waiting time
+    int cwt = 0;
+    
+    // Total waiting time
+    int twt = 0;
+    
+    // Current turn-around time
+    int ctt = 0;
+    
+    // Total turn-around time
+    int ttt = 0;
+    
     // We show the tasks
     traverse(memory);
     
@@ -55,9 +72,32 @@ void schedule()
             
         run(selected_task, selected_task->priority);
         
+        // We evaluate the waiting time
+        cwt = cwt + prev_burst;
+        
+        // We evaluate the turn-around time
+        ctt = cwt + selected_task->burst;
+        
+        printf("%s Wt: %i Tt: %i\n", selected_task->name, cwt, ctt);
+        
+        // We update the previous burst time
+        prev_burst = selected_task->burst;
+        
         // We delete the task executed
         delete(&memory, selected_task);
+        
+        // We count the number of task
+        nb_task++;
+        
+        // We evaluate the total waiting time
+        twt = twt + cwt;
+        
+        // We evaluate the total turn-around time
+        ttt = ttt + ctt;
     }
+    
+    printf("Avg Wt = %.2f\n", 1.0 * twt / nb_task);
+    printf("Avg Tt = %.2f\n", 1.0 * ttt / nb_task);
 }
 
 void add(char *name, int priority, int burst)

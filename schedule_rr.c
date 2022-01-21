@@ -10,6 +10,26 @@ void schedule()
 {
     int time_quantum = 10;
     
+    int nb_task = 0;
+    
+    // Current waiting time
+    int cwt = 0;
+    
+    // Total waiting time
+    int twt = 0;
+    
+    // Current turn-around time
+    int ctt = 0;
+    
+    // Total turn-around time
+    int ttt = 0;
+    
+    // Current total execution time
+    int ctet = 0;
+    
+    // Number of round robbin
+    int nrr = 0;
+    
     // Task slice time
     int slice_time;
     
@@ -43,12 +63,48 @@ void schedule()
             if (curr_memory->task->burst == 0) {
                 // We delete the completely executed task
                 delete(&memory, curr_memory->task);
+                
+                // We evaluate the waiting time
+            	cwt = ctet - nrr * time_quantum;
+            
+            	// We evaluate the turn-around time
+            	ctt = ctet + slice_time;
+            	
+            	// We count the number of task
+				nb_task++;
+				
+				// We evaluate the total waiting time
+				twt = twt + cwt;
+				
+				// We evaluate the total turn-around time
+				ttt = ttt + ctt;
+				
+				// We count the number of task
+				nb_task++;
+				
+				// We evaluate the total waiting time
+				twt = twt + cwt;
+				
+				// We evaluate the total turn-around time
+				ttt = ttt + ctt;
+            
+                // We print his waiting time        	
+				printf("%s Wt: %i Tt: %i Nrr: %i\n", curr_memory->task->name, cwt, ctt, nrr);
             }
+            
+            // We evaluate the current total execution time
+            ctet = ctet + slice_time;
             
             // We go to the next
             curr_memory = curr_memory->next;
         }
+        
+        // We evaluate the number of round robbin
+        nrr = nrr + 1;  
     }
+    
+    printf("Avg Wt = %.2f\n", 1.0 * twt / nb_task);
+    printf("Avg Tt = %.2f\n", 1.0 * ttt / nb_task);
 }
 
 void add(char *name, int priority, int burst)
