@@ -14,20 +14,28 @@
 ## For example, to build the FCFS scheduler, enter
 
 ```sh
-	make fcfs
+// which builds the fcfs executable file.
+make fcfs
 ```
-	which builds the fcfs executable file.
 
 # My notes
 
 ## CPU.h
-###	Contains the function *run*, this function simulate the execution of a task by the CPU (read the task from the memory and execute it)
+#### Simulate the CPU:
+- Contains the function *run*, this function simulate the execution of a task by the CPU (read the task from the memory and execute it)
+
+## list.h
+#### Simulate the memory operations
+- Contains the functions *insert*, *delete* and *traverse*.
 
 ## schedulers.h
-### Contains the functions *add* and *schedule*. The first permit to simulate the loading of the processes in the memory and the second permit to simulate the scheduling of the execution of the tasks.
+#### Functionality of the OS:
+- Contains the functions *add* and *schedule*. The first permit to simulate the loading of the processes in the memory and the second permit to simulate the scheduling of the execution of the tasks.
+- The function *add* use the memory operation *insert* to insert the tasks in the memory.
+- The function *schedule* use the memeory opration *delete* and *traverse* to read and to delete a task on the memory.
 
 ## driver.c
-### Simulate the OS:
+#### Simulate the OS:
 - Loading the tasks in the memory in calling the function *add*
 - Schedule the execution in calling the function *schedule*
 
