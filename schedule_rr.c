@@ -24,6 +24,12 @@ void schedule()
     // Total turn-around time
     int ttt = 0;
     
+    // Current response time
+    int crt = 0;
+    
+    // Total response time
+    int trt = 0;
+    
     // Current total execution time
     int ctet = 0;
     
@@ -70,26 +76,23 @@ void schedule()
             	// We evaluate the turn-around time
             	ctt = ctet + slice_time;
             	
-            	// We count the number of task
-				nb_task++;
+            	// We evaluate the response time
+				crt = ctt - cwt;
 				
 				// We evaluate the total waiting time
 				twt = twt + cwt;
 				
 				// We evaluate the total turn-around time
 				ttt = ttt + ctt;
+				
+				// We evaluate the total response time
+				trt = trt + crt;
 				
 				// We count the number of task
 				nb_task++;
-				
-				// We evaluate the total waiting time
-				twt = twt + cwt;
-				
-				// We evaluate the total turn-around time
-				ttt = ttt + ctt;
             
                 // We print his waiting time        	
-				printf("%s Wt: %i Tt: %i Nrr: %i\n", curr_memory->task->name, cwt, ctt, nrr);
+				printf("%s Wt: %i Tt: %i Rt: %i Nrr: %i\n", curr_memory->task->name, cwt, ctt, crt, nrr);
             }
             
             // We evaluate the current total execution time
@@ -105,6 +108,7 @@ void schedule()
     
     printf("Avg Wt = %.2f\n", 1.0 * twt / nb_task);
     printf("Avg Tt = %.2f\n", 1.0 * ttt / nb_task);
+    printf("Avg Rt = %.2f\n", 1.0 * trt / nb_task);
 }
 
 void add(char *name, int priority, int burst)

@@ -38,6 +38,12 @@ void schedule()
     // Total turn-around time
     int ttt = 0;
     
+    // Current response time
+    int crt = 0;
+    
+    // Total response time
+    int trt = 0;
+    
     // We show the tasks
     traverse(memory);
     
@@ -57,7 +63,10 @@ void schedule()
         // We evaluate the turn-around time
         ctt = cwt + selected_task->burst;
         
-        printf("%s Wt: %i Tt: %i\n", selected_task->name, cwt, ctt);
+        // We evaluate the response time
+        crt = ctt - cwt;
+        
+        printf("%s Wt: %i Tt: %i Rt: %i\n", selected_task->name, cwt, ctt, crt);
         
         // We update the previous burst time
         prev_burst = selected_task->burst;
@@ -73,10 +82,14 @@ void schedule()
         
         // We evaluate the total turn-around time
         ttt = ttt + ctt;
+        
+        // We evaluate the total response time
+        trt = trt + crt;
     }
     
     printf("Avg Wt = %.2f\n", 1.0 * twt / nb_task);
     printf("Avg Tt = %.2f\n", 1.0 * ttt / nb_task);
+    printf("Avg Rt = %.2f\n", 1.0 * trt / nb_task);
 }
 
 void add(char *name, int priority, int burst)
