@@ -26,7 +26,6 @@ void sort() {
 
 void schedule()
 {
-    int time_quantum = 10;
     int curr_priority;
     
     int nb_task = 0;
@@ -83,8 +82,8 @@ void schedule()
         while (curr_memory != NULL && curr_memory->task->priority == curr_priority)
         {
             // We evaluate the slice time
-            if (curr_memory->task->burst > time_quantum) {
-            	slice_time = time_quantum;
+            if (curr_memory->task->burst > QUANTUM) {
+            	slice_time = QUANTUM;
             } else {
             	slice_time = curr_memory->task->burst;
             }
@@ -100,7 +99,7 @@ void schedule()
                 delete(&memory, curr_memory->task);
                 
                 // We evaluate the waiting time
-            	cwt = ctet - nrr * time_quantum;
+            	cwt = ctet - nrr * QUANTUM;
             
             	// We evaluate the turn-around time
             	ctt = ctet + slice_time;

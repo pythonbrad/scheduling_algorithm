@@ -7,9 +7,7 @@
 struct node* memory;
 
 void schedule()
-{
-    int time_quantum = 10;
-    
+{    
     int nb_task = 0;
     
     // Current waiting time
@@ -54,8 +52,8 @@ void schedule()
         while (curr_memory != NULL)
         {
             // We evaluate the slice time
-            if (curr_memory->task->burst > time_quantum) {
-            	slice_time = time_quantum;
+            if (curr_memory->task->burst > QUANTUM) {
+            	slice_time = QUANTUM;
             } else {
             	slice_time = curr_memory->task->burst;
             }
@@ -71,7 +69,7 @@ void schedule()
                 delete(&memory, curr_memory->task);
                 
                 // We evaluate the waiting time
-            	cwt = ctet - nrr * time_quantum;
+            	cwt = ctet - nrr * QUANTUM;
             
             	// We evaluate the turn-around time
             	ctt = ctet + slice_time;
