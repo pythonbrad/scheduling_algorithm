@@ -113,10 +113,6 @@ void add(char *name, int priority, int burst)
 {
     static int tid = 0;
     
-    // We create a memory if not already created
-    if (memory == NULL)
-    	malloc(sizeof(struct node));
-    
     // We create the memory
     Task *new_task = malloc(sizeof(Task));
     new_task->tid = tid++;
