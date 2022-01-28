@@ -143,7 +143,7 @@ void add(char *name, int priority, int burst)
 {
     static int tid = 0;
     
-    // We create the memory
+    // We allocate the memory
     Task *new_task = malloc(sizeof(Task));
     new_task->tid = tid++;
     new_task->name = strdup(name);
