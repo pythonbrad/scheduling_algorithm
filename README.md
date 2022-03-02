@@ -13,7 +13,7 @@
 
 ## For example, to build the FCFS scheduler, enter
 
-```sh
+```bash
 // which builds the fcfs executable file.
 make fcfs
 ```
